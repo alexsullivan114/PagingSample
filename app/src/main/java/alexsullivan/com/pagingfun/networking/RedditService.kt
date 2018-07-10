@@ -13,7 +13,7 @@ interface RedditService {
                @Query("before") before: String? = null): Call<RedditApiResponse>
 
   companion object {
-    const val BASE_URL = "https://www.reddit.com/"
+    private const val BASE_URL = "https://www.reddit.com/"
 
     fun createService(): RedditService {
       return Retrofit.Builder()

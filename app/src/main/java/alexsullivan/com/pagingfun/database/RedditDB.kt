@@ -14,7 +14,7 @@ import android.content.Context
 abstract class RedditDb : RoomDatabase() {
   companion object {
     fun create(context: Context): RedditDb {
-      val databaseBuilder = Room.databaseBuilder(context, RedditDb::class.java, "reddit.db")
+      val databaseBuilder = Room.databaseBuilder(context, RedditDb::class.java, "redditfun.db")
       return databaseBuilder.build()
     }
   }

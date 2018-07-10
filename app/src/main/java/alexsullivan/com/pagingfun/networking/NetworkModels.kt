@@ -5,14 +5,8 @@ import android.arch.persistence.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 
 class RedditApiResponse(val data: RedditListing)
-
-class RedditListing(
-  val children: List<PostContainer>,
-  val after: String?,
-  val before: String?
-)
-
-data class PostContainer(val data: RedditPost)
+class RedditListing(val children: List<PostContainer>)
+class PostContainer(val data: RedditPost)
 
 @Entity
 data class RedditPost(

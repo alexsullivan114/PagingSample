@@ -18,6 +18,10 @@ class MainActivity : AppCompatActivity() {
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_main)
+    initializeList()
+  }
+
+  private fun initializeList() {
     list.layoutManager = LinearLayoutManager(this)
     list.adapter = adapter
 
