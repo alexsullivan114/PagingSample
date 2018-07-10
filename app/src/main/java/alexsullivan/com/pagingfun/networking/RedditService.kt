@@ -8,7 +8,9 @@ import retrofit2.http.Query
 
 interface RedditService {
   @GET("/r/aww/hot.json")
-  fun getPosts(@Query("limit") limit: Int = 30): Call<RedditApiResponse>
+  fun getPosts(@Query("limit") limit: Int = 30,
+               @Query("after") after: String? = null,
+               @Query("before") before: String? = null): Call<RedditApiResponse>
 
   companion object {
     const val BASE_URL = "https://www.reddit.com/"
