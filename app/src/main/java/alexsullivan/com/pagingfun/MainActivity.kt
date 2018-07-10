@@ -1,6 +1,8 @@
 package alexsullivan.com.pagingfun
 
+import alexsullivan.com.pagingfun.database.RedditDb
 import alexsullivan.com.pagingfun.networking.RedditPost
+import alexsullivan.com.pagingfun.networking.RedditService
 import android.arch.lifecycle.Observer
 import android.arch.paging.LivePagedListBuilder
 import android.arch.paging.PagedList
@@ -19,12 +21,16 @@ class MainActivity : AppCompatActivity() {
     list.layoutManager = LinearLayoutManager(this)
     list.adapter = adapter
 
+    val database = RedditDb.create(this)
+
     val config = PagedList.Config.Builder()
       .setPageSize(30)
       .setEnablePlaceholders(false)
       .build()
 
-    val liveData = LivePagedListBuilder<String, RedditPost>(RedditDataSourceFactory(), config).build()
+    val livePagedListBuilder = LivePagedListBuilder<Int, RedditPost>(database.posts().posts(), config)
+    livePagedListBuilder.setBoundaryCallback(RedditBoundaryCallback(database, RedditService.createService()))
+    val liveData = livePagedListBuilder.build()
     liveData
       .observe(this, Observer<PagedList<RedditPost>> { pagedList ->
         adapter.submitList(pagedList)
