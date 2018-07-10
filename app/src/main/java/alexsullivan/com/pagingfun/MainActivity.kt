@@ -58,16 +58,16 @@ class MainActivity : AppCompatActivity() {
     val database = RedditDb.create(this)
 
     val config = PagedList.Config.Builder()
-      .setPageSize(30)
-      .setEnablePlaceholders(false)
-      .build()
+        .setPageSize(30)
+        .setEnablePlaceholders(false)
+        .build()
 
     val livePagedListBuilder = LivePagedListBuilder<Int, RedditPost>(database.posts().posts(), config)
     livePagedListBuilder.setBoundaryCallback(RedditBoundaryCallback(database, RedditService.createService()))
     val liveData = livePagedListBuilder.build()
     liveData
-      .observe(this, Observer<PagedList<RedditPost>> { pagedList ->
-        adapter.submitList(pagedList)
-      })
+        .observe(this, Observer<PagedList<RedditPost>> { pagedList ->
+          adapter.submitList(pagedList)
+        })
   }
 }

@@ -37,9 +37,9 @@ import android.arch.persistence.room.RoomDatabase
 import android.content.Context
 
 @Database(
-  entities = arrayOf(RedditPost::class),
-  version = 1,
-  exportSchema = false
+    entities = [(RedditPost::class)],
+    version = 1,
+    exportSchema = false
 )
 abstract class RedditDb : RoomDatabase() {
   companion object {

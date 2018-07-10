@@ -10,7 +10,7 @@ import android.view.ViewGroup
 import kotlinx.android.synthetic.main.adapter_row.view.*
 
 class RedditAdapter :
-  PagedListAdapter<RedditPost, RedditViewHolder>(RedditDiffUtilCallback()) {
+    PagedListAdapter<RedditPost, RedditViewHolder>(RedditDiffUtilCallback()) {
 
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RedditViewHolder {
     val layout = LayoutInflater.from(parent.context).inflate(R.layout.adapter_row, parent, false)
@@ -29,7 +29,7 @@ class RedditAdapter :
 
 class RedditViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 
-class RedditDiffUtilCallback: DiffUtil.ItemCallback<RedditPost>() {
+class RedditDiffUtilCallback : DiffUtil.ItemCallback<RedditPost>() {
   override fun areItemsTheSame(oldItem: RedditPost?, newItem: RedditPost?): Boolean {
     return oldItem == newItem
   }

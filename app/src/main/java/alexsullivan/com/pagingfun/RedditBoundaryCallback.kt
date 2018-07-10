@@ -43,8 +43,8 @@ import retrofit2.Response
 import java.util.concurrent.Executors
 
 class RedditBoundaryCallback(
-  private val db: RedditDb,
-  private val service: RedditService
+    private val db: RedditDb,
+    private val service: RedditService
 ) : PagedList.BoundaryCallback<RedditPost>() {
   private val executor = Executors.newSingleThreadExecutor()
   private val helper = PagingRequestHelper(executor)
@@ -53,7 +53,7 @@ class RedditBoundaryCallback(
     super.onZeroItemsLoaded()
     helper.runIfNotRunning(PagingRequestHelper.RequestType.INITIAL) {
       service.getPosts()
-        .enqueue(buildApiCallback(it))
+          .enqueue(buildApiCallback(it))
     }
   }
 
@@ -61,7 +61,7 @@ class RedditBoundaryCallback(
     super.onItemAtEndLoaded(itemAtEnd)
     helper.runIfNotRunning(PagingRequestHelper.RequestType.AFTER) {
       service.getPosts(after = itemAtEnd.key)
-        .enqueue(buildApiCallback(it))
+          .enqueue(buildApiCallback(it))
     }
   }
 
@@ -73,8 +73,8 @@ class RedditBoundaryCallback(
       }
 
       override fun onResponse(
-        call: Call<RedditApiResponse>?,
-        response: Response<RedditApiResponse>
+          call: Call<RedditApiResponse>?,
+          response: Response<RedditApiResponse>
       ) {
         val posts = response.body()?.data?.children?.map { it.data }
         executor.execute {

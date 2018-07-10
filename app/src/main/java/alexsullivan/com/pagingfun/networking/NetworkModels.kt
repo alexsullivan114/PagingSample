@@ -40,14 +40,14 @@ class PostContainer(val data: RedditPost)
 
 @Entity
 data class RedditPost(
-  @SerializedName("name")
-  val key: String,
-  @SerializedName("title")
-  @PrimaryKey
-  val title: String,
-  @SerializedName("score")
-  val score: Int,
-  @SerializedName("author")
-  val author: String,
-  @SerializedName("num_comments")
-  val commentCount: Int)
+    @SerializedName("name")
+    val key: String,
+    @SerializedName("title")
+    @PrimaryKey
+    val title: String,
+    @SerializedName("score")
+    val score: Int,
+    @SerializedName("author")
+    val author: String,
+    @SerializedName("num_comments")
+    val commentCount: Int)

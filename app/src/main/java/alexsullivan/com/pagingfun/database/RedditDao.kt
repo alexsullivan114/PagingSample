@@ -40,8 +40,8 @@ import android.arch.persistence.room.Query
 @Dao
 interface RedditPostDao {
   @Insert(onConflict = OnConflictStrategy.REPLACE)
-  fun insert(posts : List<RedditPost>)
+  fun insert(posts: List<RedditPost>)
 
   @Query("SELECT * FROM RedditPost")
-  fun posts() : DataSource.Factory<Int, RedditPost>
+  fun posts(): DataSource.Factory<Int, RedditPost>
 }

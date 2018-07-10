@@ -48,10 +48,10 @@ interface RedditService {
 
     fun createService(): RedditService {
       return Retrofit.Builder()
-        .baseUrl(BASE_URL)
-        .addConverterFactory(GsonConverterFactory.create())
-        .build()
-        .create(RedditService::class.java)
+          .baseUrl(BASE_URL)
+          .addConverterFactory(GsonConverterFactory.create())
+          .build()
+          .create(RedditService::class.java)
     }
   }
 }
