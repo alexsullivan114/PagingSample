@@ -38,6 +38,7 @@ import android.arch.paging.LivePagedListBuilder
 import android.arch.paging.PagedList
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -54,6 +55,7 @@ class MainActivity : AppCompatActivity() {
   private fun initializeList() {
     list.layoutManager = LinearLayoutManager(this)
     list.adapter = adapter
+    list.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
 
     val database = RedditDb.create(this)
 

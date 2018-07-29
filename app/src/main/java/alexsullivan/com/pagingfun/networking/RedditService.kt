@@ -28,7 +28,6 @@
  * THE SOFTWARE.
  */
 
-
 package alexsullivan.com.pagingfun.networking
 
 import retrofit2.Call

@@ -28,28 +28,6 @@
  * THE SOFTWARE.
  */
 
-package alexsullivan.com.pagingfun
+package alexsullivan.com.pagingfun.networking
 
-import alexsullivan.com.pagingfun.networking.RedditPost
-import android.arch.paging.PagedListAdapter
-import android.view.LayoutInflater
-import android.view.ViewGroup
-import kotlinx.android.synthetic.main.adapter_row.view.*
-
-class RedditAdapter :
-    PagedListAdapter<RedditPost, RedditViewHolder>(RedditDiffUtilCallback()) {
-
-  override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RedditViewHolder {
-    val layout = LayoutInflater.from(parent.context).inflate(R.layout.adapter_row, parent, false)
-    return RedditViewHolder(layout)
-  }
-
-  override fun onBindViewHolder(holder: RedditViewHolder, position: Int) {
-    val item = getItem(position)
-    holder.itemView.title.text = item?.title
-    holder.itemView.score.text =
-        holder.itemView.context.getString(R.string.score, item?.score)
-    holder.itemView.comments.text =
-        holder.itemView.context.getString(R.string.comments, item?.commentCount)
-  }
-}
+class RedditListing(val children: List<PostContainer>)
