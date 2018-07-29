@@ -28,20 +28,29 @@
  * THE SOFTWARE.
  */
 
-package alexsullivan.com.pagingfun.database
+package android.raywenderlich.com.RedditClone
 
-import alexsullivan.com.pagingfun.networking.RedditPost
-import android.arch.paging.DataSource
-import android.arch.persistence.room.Dao
-import android.arch.persistence.room.Insert
-import android.arch.persistence.room.OnConflictStrategy
-import android.arch.persistence.room.Query
+import android.arch.paging.PagedListAdapter
+import android.raywenderlich.com.R
+import android.raywenderlich.com.RedditClone.networking.RedditPost
+import android.view.LayoutInflater
+import android.view.ViewGroup
+import kotlinx.android.synthetic.main.adapter_row.view.*
 
-@Dao
-interface RedditPostDao {
-  @Insert(onConflict = OnConflictStrategy.REPLACE)
-  fun insert(posts: List<RedditPost>)
+class RedditAdapter :
+    PagedListAdapter<RedditPost, RedditViewHolder>(RedditDiffUtilCallback()) {
 
-  @Query("SELECT * FROM RedditPost")
-  fun posts(): DataSource.Factory<Int, RedditPost>
+  override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RedditViewHolder {
+    val layout = LayoutInflater.from(parent.context).inflate(R.layout.adapter_row, parent, false)
+    return RedditViewHolder(layout)
+  }
+
+  override fun onBindViewHolder(holder: RedditViewHolder, position: Int) {
+    val item = getItem(position)
+    holder.itemView.title.text = item?.title
+    holder.itemView.score.text =
+        holder.itemView.context.getString(R.string.score, item?.score)
+    holder.itemView.comments.text =
+        holder.itemView.context.getString(R.string.comments, item?.commentCount)
+  }
 }

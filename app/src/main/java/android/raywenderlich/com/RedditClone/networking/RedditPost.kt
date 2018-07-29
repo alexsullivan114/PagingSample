@@ -28,26 +28,22 @@
  * THE SOFTWARE.
  */
 
-package alexsullivan.com.pagingfun.database
+package android.raywenderlich.com.RedditClone.networking
 
-import alexsullivan.com.pagingfun.networking.RedditPost
-import android.arch.persistence.room.Database
-import android.arch.persistence.room.Room
-import android.arch.persistence.room.RoomDatabase
-import android.content.Context
+import android.arch.persistence.room.Entity
+import android.arch.persistence.room.PrimaryKey
+import com.google.gson.annotations.SerializedName
 
-@Database(
-    entities = [(RedditPost::class)],
-    version = 1,
-    exportSchema = false
-)
-abstract class RedditDb : RoomDatabase() {
-  companion object {
-    fun create(context: Context): RedditDb {
-      val databaseBuilder = Room.databaseBuilder(context, RedditDb::class.java, "redditfun.db")
-      return databaseBuilder.build()
-    }
-  }
-
-  abstract fun posts(): RedditPostDao
-}
+@Entity
+data class RedditPost(
+    @SerializedName("name")
+    val key: String,
+    @SerializedName("title")
+    @PrimaryKey
+    val title: String,
+    @SerializedName("score")
+    val score: Int,
+    @SerializedName("author")
+    val author: String,
+    @SerializedName("num_comments")
+    val commentCount: Int)

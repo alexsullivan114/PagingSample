@@ -28,13 +28,13 @@
  * THE SOFTWARE.
  */
 
-package alexsullivan.com.pagingfun
+package android.raywenderlich.com.RedditClone
 
-import alexsullivan.com.pagingfun.database.RedditDb
-import alexsullivan.com.pagingfun.networking.RedditApiResponse
-import alexsullivan.com.pagingfun.networking.RedditPost
-import alexsullivan.com.pagingfun.networking.RedditService
-import alexsullivan.com.pagingfun.utils.PagingRequestHelper
+import android.raywenderlich.com.RedditClone.database.RedditDb
+import android.raywenderlich.com.RedditClone.networking.RedditApiResponse
+import android.raywenderlich.com.RedditClone.networking.RedditPost
+import android.raywenderlich.com.RedditClone.networking.RedditService
+import android.raywenderlich.com.RedditClone.utils.PagingRequestHelper
 import android.arch.paging.PagedList
 import android.util.Log
 import retrofit2.Call

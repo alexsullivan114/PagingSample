@@ -28,9 +28,20 @@
  * THE SOFTWARE.
  */
 
-package alexsullivan.com.pagingfun
+package android.raywenderlich.com.RedditClone.database
 
-import android.support.v7.widget.RecyclerView
-import android.view.View
+import android.raywenderlich.com.RedditClone.networking.RedditPost
+import android.arch.paging.DataSource
+import android.arch.persistence.room.Dao
+import android.arch.persistence.room.Insert
+import android.arch.persistence.room.OnConflictStrategy
+import android.arch.persistence.room.Query
 
-class RedditViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
+@Dao
+interface RedditPostDao {
+  @Insert(onConflict = OnConflictStrategy.REPLACE)
+  fun insert(posts: List<RedditPost>)
+
+  @Query("SELECT * FROM RedditPost")
+  fun posts(): DataSource.Factory<Int, RedditPost>
+}

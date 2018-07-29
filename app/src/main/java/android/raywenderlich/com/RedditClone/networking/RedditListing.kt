@@ -28,6 +28,6 @@
  * THE SOFTWARE.
  */
 
-package alexsullivan.com.pagingfun.networking
+package android.raywenderlich.com.RedditClone.networking
 
-class RedditApiResponse(val data: RedditListing)
+class RedditListing(val children: List<PostContainer>)

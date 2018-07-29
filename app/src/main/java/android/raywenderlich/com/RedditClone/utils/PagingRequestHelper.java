@@ -1,4 +1,4 @@
-package alexsullivan.com.pagingfun.utils;
+package android.raywenderlich.com.RedditClone.utils;
 
 import android.support.annotation.AnyThread;
 import android.support.annotation.GuardedBy;

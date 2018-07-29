@@ -28,48 +28,17 @@
  * THE SOFTWARE.
  */
 
-package alexsullivan.com.pagingfun
+package android.raywenderlich.com.RedditClone
 
-import alexsullivan.com.pagingfun.database.RedditDb
-import alexsullivan.com.pagingfun.networking.RedditPost
-import alexsullivan.com.pagingfun.networking.RedditService
-import android.arch.lifecycle.Observer
-import android.arch.paging.LivePagedListBuilder
-import android.arch.paging.PagedList
-import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.DividerItemDecoration
-import android.support.v7.widget.LinearLayoutManager
-import kotlinx.android.synthetic.main.activity_main.*
+import android.raywenderlich.com.RedditClone.networking.RedditPost
+import android.support.v7.util.DiffUtil
 
-class MainActivity : AppCompatActivity() {
-
-  val adapter = RedditAdapter()
-
-  override fun onCreate(savedInstanceState: Bundle?) {
-    super.onCreate(savedInstanceState)
-    setContentView(R.layout.activity_main)
-    initializeList()
+class RedditDiffUtilCallback : DiffUtil.ItemCallback<RedditPost>() {
+  override fun areItemsTheSame(oldItem: RedditPost?, newItem: RedditPost?): Boolean {
+    return oldItem == newItem
   }
 
-  private fun initializeList() {
-    list.layoutManager = LinearLayoutManager(this)
-    list.adapter = adapter
-    list.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
-
-    val database = RedditDb.create(this)
-
-    val config = PagedList.Config.Builder()
-        .setPageSize(30)
-        .setEnablePlaceholders(false)
-        .build()
-
-    val livePagedListBuilder = LivePagedListBuilder<Int, RedditPost>(database.posts().posts(), config)
-    livePagedListBuilder.setBoundaryCallback(RedditBoundaryCallback(database, RedditService.createService()))
-    val liveData = livePagedListBuilder.build()
-    liveData
-        .observe(this, Observer<PagedList<RedditPost>> { pagedList ->
-          adapter.submitList(pagedList)
-        })
+  override fun areContentsTheSame(oldItem: RedditPost?, newItem: RedditPost?): Boolean {
+    return oldItem?.title == newItem?.title
   }
 }

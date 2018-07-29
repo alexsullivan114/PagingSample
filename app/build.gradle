@@ -36,7 +36,7 @@ apply plugin: 'kotlin-android-extensions'
 android {
     compileSdkVersion 27
     defaultConfig {
-        applicationId "alexsullivan.com.pagingfun"
+        applicationId "android.raywenderlich.com"
         minSdkVersion 19
         targetSdkVersion 27
         versionCode 1

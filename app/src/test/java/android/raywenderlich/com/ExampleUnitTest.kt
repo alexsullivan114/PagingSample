@@ -1,4 +1,4 @@
-package alexsullivan.com.pagingfun
+package android.raywenderlich.com
 
 import org.junit.Test
 

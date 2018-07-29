@@ -28,28 +28,49 @@
  * THE SOFTWARE.
  */
 
-package alexsullivan.com.pagingfun
+package android.raywenderlich.com.RedditClone
 
-import alexsullivan.com.pagingfun.networking.RedditPost
-import android.arch.paging.PagedListAdapter
-import android.view.LayoutInflater
-import android.view.ViewGroup
-import kotlinx.android.synthetic.main.adapter_row.view.*
+import android.raywenderlich.com.RedditClone.database.RedditDb
+import android.raywenderlich.com.RedditClone.networking.RedditPost
+import android.raywenderlich.com.RedditClone.networking.RedditService
+import android.arch.lifecycle.Observer
+import android.arch.paging.LivePagedListBuilder
+import android.arch.paging.PagedList
+import android.os.Bundle
+import android.raywenderlich.com.R
+import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.DividerItemDecoration
+import android.support.v7.widget.LinearLayoutManager
+import kotlinx.android.synthetic.main.activity_main.*
 
-class RedditAdapter :
-    PagedListAdapter<RedditPost, RedditViewHolder>(RedditDiffUtilCallback()) {
+class MainActivity : AppCompatActivity() {
 
-  override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RedditViewHolder {
-    val layout = LayoutInflater.from(parent.context).inflate(R.layout.adapter_row, parent, false)
-    return RedditViewHolder(layout)
+  val adapter = RedditAdapter()
+
+  override fun onCreate(savedInstanceState: Bundle?) {
+    super.onCreate(savedInstanceState)
+    setContentView(R.layout.activity_main)
+    initializeList()
   }
 
-  override fun onBindViewHolder(holder: RedditViewHolder, position: Int) {
-    val item = getItem(position)
-    holder.itemView.title.text = item?.title
-    holder.itemView.score.text =
-        holder.itemView.context.getString(R.string.score, item?.score)
-    holder.itemView.comments.text =
-        holder.itemView.context.getString(R.string.comments, item?.commentCount)
+  private fun initializeList() {
+    list.layoutManager = LinearLayoutManager(this)
+    list.adapter = adapter
+    list.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
+
+    val database = RedditDb.create(this)
+
+    val config = PagedList.Config.Builder()
+        .setPageSize(30)
+        .setEnablePlaceholders(false)
+        .build()
+
+    val livePagedListBuilder = LivePagedListBuilder<Int, RedditPost>(database.posts().posts(), config)
+    livePagedListBuilder.setBoundaryCallback(RedditBoundaryCallback(database, RedditService.createService()))
+    val liveData = livePagedListBuilder.build()
+    liveData
+        .observe(this, Observer<PagedList<RedditPost>> { pagedList ->
+          adapter.submitList(pagedList)
+        })
   }
 }

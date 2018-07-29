@@ -1,4 +1,4 @@
-package alexsullivan.com.pagingfun
+package android.raywenderlich.com
 
 import android.support.test.InstrumentationRegistry
 import android.support.test.runner.AndroidJUnit4
