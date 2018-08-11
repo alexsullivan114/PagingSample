@@ -38,7 +38,7 @@ import retrofit2.http.Query
 
 interface RedditService {
   @GET("/r/aww/hot.json")
-  fun getPosts(@Query("limit") limit: Int = 30,
+  fun getPosts(@Query("limit") loadSize: Int = 30,
                @Query("after") after: String? = null,
                @Query("before") before: String? = null): Call<RedditApiResponse>
 

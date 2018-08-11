@@ -30,4 +30,4 @@
 
 package android.raywenderlich.com.RedditClone.networking
 
-class RedditListing(val children: List<PostContainer>)
+class RedditListing(val children: List<PostContainer>, val after: String?, val before: String?)
