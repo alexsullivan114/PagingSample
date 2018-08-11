@@ -30,18 +30,11 @@
 
 package android.raywenderlich.com.RedditClone
 
-import android.raywenderlich.com.RedditClone.database.RedditDb
-import android.raywenderlich.com.RedditClone.networking.RedditPost
-import android.raywenderlich.com.RedditClone.networking.RedditService
-import android.arch.lifecycle.Observer
-import android.arch.paging.LivePagedListBuilder
-import android.arch.paging.PagedList
 import android.os.Bundle
 import android.raywenderlich.com.R
 import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
-import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_main.list
 
 class MainActivity : AppCompatActivity() {
 
@@ -56,21 +49,5 @@ class MainActivity : AppCompatActivity() {
   private fun initializeList() {
     list.layoutManager = LinearLayoutManager(this)
     list.adapter = adapter
-    list.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
-
-    val database = RedditDb.create(this)
-
-    val config = PagedList.Config.Builder()
-        .setPageSize(30)
-        .setEnablePlaceholders(false)
-        .build()
-
-    val livePagedListBuilder = LivePagedListBuilder<Int, RedditPost>(database.posts().posts(), config)
-    livePagedListBuilder.setBoundaryCallback(RedditBoundaryCallback(database, RedditService.createService()))
-    val liveData = livePagedListBuilder.build()
-    liveData
-        .observe(this, Observer<PagedList<RedditPost>> { pagedList ->
-          adapter.submitList(pagedList)
-        })
   }
 }
