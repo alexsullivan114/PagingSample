@@ -19,8 +19,4 @@ class RedditBoundaryCallback(private val db: RedditDb): PagedList.BoundaryCallba
   override fun onItemAtEndLoaded(itemAtEnd: RedditPost) {
     super.onItemAtEndLoaded(itemAtEnd)
   }
-
-  override fun onItemAtFrontLoaded(itemAtFront: RedditPost) {
-    super.onItemAtFrontLoaded(itemAtFront)
-  }
 }
