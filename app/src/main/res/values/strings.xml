@@ -1,5 +1,5 @@
 <resources>
     <string name="app_name">Reddit Clone</string>
     <string name="score">Score: %1$d</string>
-    <string name="comments">Comment count: %1$d</string>
+    <string name="comments">Comments: %1$d</string>
 </resources>
