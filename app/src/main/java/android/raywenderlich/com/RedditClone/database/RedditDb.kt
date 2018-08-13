@@ -18,4 +18,6 @@ abstract class RedditDb : RoomDatabase() {
       return databaseBuilder.build()
     }
   }
+
+  abstract fun postDao(): RedditPostDao
 }

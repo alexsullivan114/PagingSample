@@ -30,22 +30,29 @@
 
 package android.raywenderlich.com.RedditClone
 
+import android.arch.paging.PagedListAdapter
 import android.raywenderlich.com.R
+import android.raywenderlich.com.RedditClone.networking.RedditPost
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import kotlinx.android.synthetic.main.adapter_row.view.comments
+import kotlinx.android.synthetic.main.adapter_row.view.score
+import kotlinx.android.synthetic.main.adapter_row.view.title
 
-class RedditAdapter : RecyclerView.Adapter<RedditViewHolder>() {
+class RedditAdapter : PagedListAdapter<RedditPost, RedditViewHolder>(RedditDiffUtilCallback()) {
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RedditViewHolder {
     val view = LayoutInflater.from(parent.context).inflate(R.layout.adapter_row, parent, false)
     return RedditViewHolder(view)
   }
 
-  override fun getItemCount(): Int {
-    return 0
-  }
-
   override fun onBindViewHolder(holder: RedditViewHolder, position: Int) {
-    // nothing yet!
+    val item = getItem(position)
+    val resources = holder.itemView.context.resources
+    val scoreString = resources.getString(R.string.score, item?.score)
+    val commentCountString = resources.getString(R.string.comments, item?.commentCount)
+    holder.itemView.title.text = item?.title
+    holder.itemView.score.text = scoreString
+    holder.itemView.comments.text = commentCountString
   }
 }
