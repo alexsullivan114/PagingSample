@@ -1,6 +1,6 @@
-package android.raywenderlich.com.RedditClone
+package com.raywenderlich.android.redditclone
 
-import android.raywenderlich.com.RedditClone.networking.RedditPost
+import com.raywenderlich.android.redditclone.networking.RedditPost
 import android.support.v7.util.DiffUtil
 
 class RedditDiffUtilCallback: DiffUtil.ItemCallback<RedditPost>() {

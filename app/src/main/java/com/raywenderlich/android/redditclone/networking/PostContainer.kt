@@ -28,26 +28,6 @@
  * THE SOFTWARE.
  */
 
-package android.raywenderlich.com.RedditClone
+package com.raywenderlich.android.redditclone.networking
 
-import android.os.Bundle
-import android.raywenderlich.com.R
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.LinearLayoutManager
-import kotlinx.android.synthetic.main.activity_main.list
-
-class MainActivity : AppCompatActivity() {
-
-  val adapter = RedditAdapter()
-
-  override fun onCreate(savedInstanceState: Bundle?) {
-    super.onCreate(savedInstanceState)
-    setContentView(R.layout.activity_main)
-    initializeList()
-  }
-
-  private fun initializeList() {
-    list.layoutManager = LinearLayoutManager(this)
-    list.adapter = adapter
-  }
-}
+class PostContainer(val data: RedditPost)

@@ -1,9 +1,9 @@
-package android.raywenderlich.com.RedditClone.database
+package com.raywenderlich.android.redditclone.database
 
 import android.arch.paging.PagedList
-import android.raywenderlich.com.RedditClone.networking.RedditPost
-import android.raywenderlich.com.RedditClone.networking.RedditService
-import android.raywenderlich.com.RedditClone.utils.PagingRequestHelper
+import com.raywenderlich.android.redditclone.networking.RedditPost
+import com.raywenderlich.android.redditclone.networking.RedditService
+import com.raywenderlich.android.redditclone.utils.PagingRequestHelper
 import java.util.concurrent.Executors
 
 class RedditBoundaryCallback(private val db: RedditDb): PagedList.BoundaryCallback<RedditPost>() {

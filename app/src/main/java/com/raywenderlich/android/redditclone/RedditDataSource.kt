@@ -1,7 +1,7 @@
-package android.raywenderlich.com.RedditClone
+package com.raywenderlich.android.redditclone
 
 import android.arch.paging.PageKeyedDataSource
-import android.raywenderlich.com.RedditClone.networking.RedditPost
+import com.raywenderlich.android.redditclone.networking.RedditPost
 
 class RedditDataSource : PageKeyedDataSource<String, RedditPost>() {
   

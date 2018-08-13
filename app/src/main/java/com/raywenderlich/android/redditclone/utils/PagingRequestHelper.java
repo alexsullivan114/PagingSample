@@ -1,4 +1,4 @@
-package android.raywenderlich.com.RedditClone.utils;
+package com.raywenderlich.android.redditclone.utils;
 
 import android.support.annotation.AnyThread;
 import android.support.annotation.GuardedBy;

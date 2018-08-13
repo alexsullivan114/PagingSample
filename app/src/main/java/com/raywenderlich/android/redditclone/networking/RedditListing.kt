@@ -28,29 +28,6 @@
  * THE SOFTWARE.
  */
 
-package android.raywenderlich.com.RedditClone.networking
+package com.raywenderlich.android.redditclone.networking
 
-import retrofit2.Call
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.http.GET
-import retrofit2.http.Query
-
-interface RedditService {
-  @GET("/r/aww/hot.json")
-  fun getPosts(@Query("limit") loadSize: Int = 30,
-               @Query("after") after: String? = null,
-               @Query("before") before: String? = null): Call<RedditApiResponse>
-
-  companion object {
-    private const val BASE_URL = "https://www.reddit.com/"
-
-    fun createService(): RedditService {
-      return Retrofit.Builder()
-          .baseUrl(BASE_URL)
-          .addConverterFactory(GsonConverterFactory.create())
-          .build()
-          .create(RedditService::class.java)
-    }
-  }
-}
+class RedditListing(val children: List<PostContainer>, val after: String?, val before: String?)

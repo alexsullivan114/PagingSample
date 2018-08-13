@@ -28,24 +28,6 @@
  * THE SOFTWARE.
  */
 
-package android.raywenderlich.com.RedditClone
+package com.raywenderlich.android.redditclone.networking
 
-import android.raywenderlich.com.R
-import android.support.v7.widget.RecyclerView
-import android.view.LayoutInflater
-import android.view.ViewGroup
-
-class RedditAdapter : RecyclerView.Adapter<RedditViewHolder>() {
-  override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RedditViewHolder {
-    val view = LayoutInflater.from(parent.context).inflate(R.layout.adapter_row, parent, false)
-    return RedditViewHolder(view)
-  }
-
-  override fun getItemCount(): Int {
-    return 0
-  }
-
-  override fun onBindViewHolder(holder: RedditViewHolder, position: Int) {
-    // nothing yet!
-  }
-}
+class RedditApiResponse(val data: RedditListing)

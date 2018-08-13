@@ -1,10 +1,10 @@
-package android.raywenderlich.com.RedditClone.database
+package com.raywenderlich.android.redditclone.database
 
 import android.arch.persistence.room.Database
 import android.arch.persistence.room.Room
 import android.arch.persistence.room.RoomDatabase
 import android.content.Context
-import android.raywenderlich.com.RedditClone.networking.RedditPost
+import com.raywenderlich.android.redditclone.networking.RedditPost
 
 @Database(
   entities = [RedditPost::class],
