@@ -28,17 +28,26 @@
  * THE SOFTWARE.
  */
 
-package android.raywenderlich.com.RedditClone
+package com.raywenderlich.android.redditclone.database
 
-import android.raywenderlich.com.RedditClone.networking.RedditPost
-import android.support.v7.util.DiffUtil
+import android.arch.persistence.room.Database
+import android.arch.persistence.room.Room
+import android.arch.persistence.room.RoomDatabase
+import android.content.Context
+import com.raywenderlich.android.redditclone.networking.RedditPost
 
-class RedditDiffUtilCallback : DiffUtil.ItemCallback<RedditPost>() {
-  override fun areItemsTheSame(oldItem: RedditPost?, newItem: RedditPost?): Boolean {
-    return oldItem == newItem
+@Database(
+    entities = [(RedditPost::class)],
+    version = 1,
+    exportSchema = false
+)
+abstract class RedditDb : RoomDatabase() {
+  companion object {
+    fun create(context: Context): RedditDb {
+      val databaseBuilder = Room.databaseBuilder(context, RedditDb::class.java, "redditclone.db")
+      return databaseBuilder.build()
+    }
   }
 
-  override fun areContentsTheSame(oldItem: RedditPost?, newItem: RedditPost?): Boolean {
-    return oldItem?.title == newItem?.title
-  }
+  abstract fun posts(): RedditPostDao
 }

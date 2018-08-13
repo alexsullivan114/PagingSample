@@ -28,26 +28,49 @@
  * THE SOFTWARE.
  */
 
-package android.raywenderlich.com.RedditClone.database
+package com.raywenderlich.android.redditclone
 
-import android.raywenderlich.com.RedditClone.networking.RedditPost
-import android.arch.persistence.room.Database
-import android.arch.persistence.room.Room
-import android.arch.persistence.room.RoomDatabase
-import android.content.Context
+import android.arch.lifecycle.Observer
+import android.arch.paging.LivePagedListBuilder
+import android.arch.paging.PagedList
+import android.os.Bundle
+import android.raywenderlich.com.R
+import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.DividerItemDecoration
+import android.support.v7.widget.LinearLayoutManager
+import com.raywenderlich.android.redditclone.database.RedditDb
+import com.raywenderlich.android.redditclone.networking.RedditPost
+import com.raywenderlich.android.redditclone.networking.RedditService
+import kotlinx.android.synthetic.main.activity_main.*
 
-@Database(
-    entities = [(RedditPost::class)],
-    version = 1,
-    exportSchema = false
-)
-abstract class RedditDb : RoomDatabase() {
-  companion object {
-    fun create(context: Context): RedditDb {
-      val databaseBuilder = Room.databaseBuilder(context, RedditDb::class.java, "redditfun.db")
-      return databaseBuilder.build()
-    }
+class MainActivity : AppCompatActivity() {
+
+  val adapter = RedditAdapter()
+
+  override fun onCreate(savedInstanceState: Bundle?) {
+    super.onCreate(savedInstanceState)
+    setContentView(R.layout.activity_main)
+    initializeList()
   }
 
-  abstract fun posts(): RedditPostDao
+  private fun initializeList() {
+    list.layoutManager = LinearLayoutManager(this)
+    list.adapter = adapter
+    list.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
+
+    val database = RedditDb.create(this)
+
+    val config = PagedList.Config.Builder()
+        .setPageSize(30)
+        .setEnablePlaceholders(false)
+        .build()
+
+    val livePagedListBuilder = LivePagedListBuilder<Int, RedditPost>(database.posts().posts(), config)
+    livePagedListBuilder.setBoundaryCallback(RedditBoundaryCallback(database, RedditService.createService()))
+    val liveData = livePagedListBuilder.build()
+    liveData
+        .observe(this, Observer<PagedList<RedditPost>> { pagedList ->
+          adapter.submitList(pagedList)
+        })
+  }
 }

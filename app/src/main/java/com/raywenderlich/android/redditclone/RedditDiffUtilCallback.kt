@@ -28,20 +28,17 @@
  * THE SOFTWARE.
  */
 
-package android.raywenderlich.com.RedditClone.database
+package com.raywenderlich.android.redditclone
 
-import android.raywenderlich.com.RedditClone.networking.RedditPost
-import android.arch.paging.DataSource
-import android.arch.persistence.room.Dao
-import android.arch.persistence.room.Insert
-import android.arch.persistence.room.OnConflictStrategy
-import android.arch.persistence.room.Query
+import android.support.v7.util.DiffUtil
+import com.raywenderlich.android.redditclone.networking.RedditPost
 
-@Dao
-interface RedditPostDao {
-  @Insert(onConflict = OnConflictStrategy.REPLACE)
-  fun insert(posts: List<RedditPost>)
+class RedditDiffUtilCallback : DiffUtil.ItemCallback<RedditPost>() {
+  override fun areItemsTheSame(oldItem: RedditPost?, newItem: RedditPost?): Boolean {
+    return oldItem == newItem
+  }
 
-  @Query("SELECT * FROM RedditPost")
-  fun posts(): DataSource.Factory<Int, RedditPost>
+  override fun areContentsTheSame(oldItem: RedditPost?, newItem: RedditPost?): Boolean {
+    return oldItem?.title == newItem?.title
+  }
 }

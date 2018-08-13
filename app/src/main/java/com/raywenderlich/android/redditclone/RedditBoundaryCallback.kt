@@ -28,15 +28,15 @@
  * THE SOFTWARE.
  */
 
-package android.raywenderlich.com.RedditClone
+package com.raywenderlich.android.redditclone
 
-import android.raywenderlich.com.RedditClone.database.RedditDb
-import android.raywenderlich.com.RedditClone.networking.RedditApiResponse
-import android.raywenderlich.com.RedditClone.networking.RedditPost
-import android.raywenderlich.com.RedditClone.networking.RedditService
-import android.raywenderlich.com.RedditClone.utils.PagingRequestHelper
 import android.arch.paging.PagedList
 import android.util.Log
+import com.raywenderlich.android.redditclone.database.RedditDb
+import com.raywenderlich.android.redditclone.networking.RedditApiResponse
+import com.raywenderlich.android.redditclone.networking.RedditPost
+import com.raywenderlich.android.redditclone.networking.RedditService
+import com.raywenderlich.android.redditclone.utils.PagingRequestHelper
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

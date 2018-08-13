@@ -28,49 +28,29 @@
  * THE SOFTWARE.
  */
 
-package android.raywenderlich.com.RedditClone
+package com.raywenderlich.android.redditclone.networking
 
-import android.raywenderlich.com.RedditClone.database.RedditDb
-import android.raywenderlich.com.RedditClone.networking.RedditPost
-import android.raywenderlich.com.RedditClone.networking.RedditService
-import android.arch.lifecycle.Observer
-import android.arch.paging.LivePagedListBuilder
-import android.arch.paging.PagedList
-import android.os.Bundle
-import android.raywenderlich.com.R
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.DividerItemDecoration
-import android.support.v7.widget.LinearLayoutManager
-import kotlinx.android.synthetic.main.activity_main.*
+import retrofit2.Call
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.http.GET
+import retrofit2.http.Query
 
-class MainActivity : AppCompatActivity() {
+interface RedditService {
+  @GET("/r/aww/hot.json")
+  fun getPosts(@Query("limit") limit: Int = 30,
+               @Query("after") after: String? = null,
+               @Query("before") before: String? = null): Call<RedditApiResponse>
 
-  val adapter = RedditAdapter()
+  companion object {
+    private const val BASE_URL = "https://www.reddit.com/"
 
-  override fun onCreate(savedInstanceState: Bundle?) {
-    super.onCreate(savedInstanceState)
-    setContentView(R.layout.activity_main)
-    initializeList()
-  }
-
-  private fun initializeList() {
-    list.layoutManager = LinearLayoutManager(this)
-    list.adapter = adapter
-    list.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
-
-    val database = RedditDb.create(this)
-
-    val config = PagedList.Config.Builder()
-        .setPageSize(30)
-        .setEnablePlaceholders(false)
-        .build()
-
-    val livePagedListBuilder = LivePagedListBuilder<Int, RedditPost>(database.posts().posts(), config)
-    livePagedListBuilder.setBoundaryCallback(RedditBoundaryCallback(database, RedditService.createService()))
-    val liveData = livePagedListBuilder.build()
-    liveData
-        .observe(this, Observer<PagedList<RedditPost>> { pagedList ->
-          adapter.submitList(pagedList)
-        })
+    fun createService(): RedditService {
+      return Retrofit.Builder()
+          .baseUrl(BASE_URL)
+          .addConverterFactory(GsonConverterFactory.create())
+          .build()
+          .create(RedditService::class.java)
+    }
   }
 }

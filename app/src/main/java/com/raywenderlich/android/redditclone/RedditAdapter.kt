@@ -28,6 +28,29 @@
  * THE SOFTWARE.
  */
 
-package android.raywenderlich.com.RedditClone.networking
+package com.raywenderlich.android.redditclone
 
-class PostContainer(val data: RedditPost)
+import android.arch.paging.PagedListAdapter
+import android.raywenderlich.com.R
+import android.view.LayoutInflater
+import android.view.ViewGroup
+import com.raywenderlich.android.redditclone.networking.RedditPost
+import kotlinx.android.synthetic.main.adapter_row.view.*
+
+class RedditAdapter :
+    PagedListAdapter<RedditPost, RedditViewHolder>(RedditDiffUtilCallback()) {
+
+  override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RedditViewHolder {
+    val layout = LayoutInflater.from(parent.context).inflate(R.layout.adapter_row, parent, false)
+    return RedditViewHolder(layout)
+  }
+
+  override fun onBindViewHolder(holder: RedditViewHolder, position: Int) {
+    val item = getItem(position)
+    holder.itemView.title.text = item?.title
+    holder.itemView.score.text =
+        holder.itemView.context.getString(R.string.score, item?.score)
+    holder.itemView.comments.text =
+        holder.itemView.context.getString(R.string.comments, item?.commentCount)
+  }
+}

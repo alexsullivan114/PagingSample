@@ -28,6 +28,6 @@
  * THE SOFTWARE.
  */
 
-package android.raywenderlich.com.RedditClone.networking
+package com.raywenderlich.android.redditclone.networking
 
-class RedditApiResponse(val data: RedditListing)
+class RedditListing(val children: List<PostContainer>)
