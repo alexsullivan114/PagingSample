@@ -7,14 +7,14 @@ import android.content.Context
 import com.raywenderlich.android.redditclone.networking.RedditPost
 
 @Database(
-  entities = [RedditPost::class],
-  version = 1,
-  exportSchema = false
+    entities = [RedditPost::class],
+    version = 1,
+    exportSchema = false
 )
 abstract class RedditDb : RoomDatabase() {
   companion object {
     fun create(context: Context): RedditDb {
-      val databaseBuilder = Room.databaseBuilder(context, RedditDb::class.java, "reddit.db")
+      val databaseBuilder = Room.databaseBuilder(context, RedditDb::class.java, "redditclone.db")
       return databaseBuilder.build()
     }
   }

@@ -6,7 +6,7 @@ import com.raywenderlich.android.redditclone.networking.RedditService
 import com.raywenderlich.android.redditclone.utils.PagingRequestHelper
 import java.util.concurrent.Executors
 
-class RedditBoundaryCallback(private val db: RedditDb): PagedList.BoundaryCallback<RedditPost>() {
+class RedditBoundaryCallback(private val db: RedditDb) : PagedList.BoundaryCallback<RedditPost>() {
 
   private val api = RedditService.createService()
   private val executor = Executors.newSingleThreadExecutor()

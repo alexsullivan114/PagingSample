@@ -46,4 +46,5 @@ data class RedditPost(
     @SerializedName("author")
     val author: String,
     @SerializedName("num_comments")
-    val commentCount: Int)
+    val commentCount: Int
+)
