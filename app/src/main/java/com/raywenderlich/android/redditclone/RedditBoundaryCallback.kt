@@ -28,25 +28,27 @@
  * THE SOFTWARE.
  */
 
+
 package com.raywenderlich.android.redditclone
 
-import android.arch.paging.PageKeyedDataSource
+import android.arch.paging.PagedList
+import com.raywenderlich.android.redditclone.database.RedditDb
 import com.raywenderlich.android.redditclone.networking.RedditPost
+import com.raywenderlich.android.redditclone.networking.RedditService
+import com.raywenderlich.android.redditclone.utils.PagingRequestHelper
+import java.util.concurrent.Executors
 
-class RedditDataSource : PageKeyedDataSource<String, RedditPost>() {
+class RedditBoundaryCallback(private val db: RedditDb) : PagedList.BoundaryCallback<RedditPost>() {
 
-  override fun loadInitial(
-      params: LoadInitialParams<String>,
-      callback: LoadInitialCallback<String, RedditPost>
-  ) {
-    TODO("not implemented")
+  private val api = RedditService.createService()
+  private val executor = Executors.newSingleThreadExecutor()
+  private val helper = PagingRequestHelper(executor)
+
+  override fun onZeroItemsLoaded() {
+    super.onZeroItemsLoaded()
   }
 
-  override fun loadAfter(params: LoadParams<String>, callback: LoadCallback<String, RedditPost>) {
-    TODO("not implemented")
-  }
-
-  override fun loadBefore(params: LoadParams<String>, callback: LoadCallback<String, RedditPost>) {
-    TODO("not implemented")
+  override fun onItemAtEndLoaded(itemAtEnd: RedditPost) {
+    super.onItemAtEndLoaded(itemAtEnd)
   }
 }

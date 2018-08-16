@@ -30,19 +30,17 @@
 
 package com.raywenderlich.android.redditclone
 
+import android.arch.paging.PagedListAdapter
 import android.raywenderlich.com.R
-import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import com.raywenderlich.android.redditclone.networking.RedditPost
 
-class RedditAdapter : RecyclerView.Adapter<RedditViewHolder>() {
+class RedditAdapter : PagedListAdapter<RedditPost, RedditViewHolder>(RedditDiffUtilCallback()) {
+
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RedditViewHolder {
     val view = LayoutInflater.from(parent.context).inflate(R.layout.adapter_row, parent, false)
     return RedditViewHolder(view)
-  }
-
-  override fun getItemCount(): Int {
-    return 0
   }
 
   override fun onBindViewHolder(holder: RedditViewHolder, position: Int) {
