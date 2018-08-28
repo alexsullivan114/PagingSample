@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017 Razeware LLC
+ * Copyright (c) 2018 Razeware LLC
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -30,4 +30,4 @@
 
 package com.raywenderlich.android.redditclone.networking
 
-class RedditListing(val children: List<PostContainer>)
+class RedditListing(val children: List<PostContainer>, val after: String?, val before: String?)

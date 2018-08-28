@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017 Razeware LLC
+ * Copyright (c) 2018 Razeware LLC
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -35,22 +35,15 @@ import android.raywenderlich.com.R
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.raywenderlich.android.redditclone.networking.RedditPost
-import kotlinx.android.synthetic.main.adapter_row.view.*
 
-class RedditAdapter :
-    PagedListAdapter<RedditPost, RedditViewHolder>(RedditDiffUtilCallback()) {
+class RedditAdapter : PagedListAdapter<RedditPost, RedditViewHolder>(RedditDiffUtilCallback()) {
 
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RedditViewHolder {
-    val layout = LayoutInflater.from(parent.context).inflate(R.layout.adapter_row, parent, false)
-    return RedditViewHolder(layout)
+    val view = LayoutInflater.from(parent.context).inflate(R.layout.adapter_row, parent, false)
+    return RedditViewHolder(view)
   }
 
   override fun onBindViewHolder(holder: RedditViewHolder, position: Int) {
-    val item = getItem(position)
-    holder.itemView.title.text = item?.title
-    holder.itemView.score.text =
-        holder.itemView.context.getString(R.string.score, item?.score)
-    holder.itemView.comments.text =
-        holder.itemView.context.getString(R.string.comments, item?.commentCount)
+    // nothing yet!
   }
 }

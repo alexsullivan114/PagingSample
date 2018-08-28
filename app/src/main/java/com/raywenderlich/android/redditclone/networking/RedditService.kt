@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017 Razeware LLC
+ * Copyright (c) 2018 Razeware LLC
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -38,7 +38,7 @@ import retrofit2.http.Query
 
 interface RedditService {
   @GET("/r/aww/hot.json")
-  fun getPosts(@Query("limit") limit: Int = 30,
+  fun getPosts(@Query("limit") loadSize: Int = 30,
                @Query("after") after: String? = null,
                @Query("before") before: String? = null): Call<RedditApiResponse>
 

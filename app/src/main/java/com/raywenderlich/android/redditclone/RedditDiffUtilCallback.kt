@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017 Razeware LLC
+ * Copyright (c) 2018 Razeware LLC
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -34,11 +34,12 @@ import android.support.v7.util.DiffUtil
 import com.raywenderlich.android.redditclone.networking.RedditPost
 
 class RedditDiffUtilCallback : DiffUtil.ItemCallback<RedditPost>() {
+
   override fun areItemsTheSame(oldItem: RedditPost?, newItem: RedditPost?): Boolean {
-    return oldItem == newItem
+    TODO("not implemented")
   }
 
   override fun areContentsTheSame(oldItem: RedditPost?, newItem: RedditPost?): Boolean {
-    return oldItem?.title == newItem?.title
+    TODO("not implemented")
   }
 }

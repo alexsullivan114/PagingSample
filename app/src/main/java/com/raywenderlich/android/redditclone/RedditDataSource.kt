@@ -30,24 +30,23 @@
 
 package com.raywenderlich.android.redditclone
 
-import android.os.Bundle
-import android.raywenderlich.com.R
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.LinearLayoutManager
-import kotlinx.android.synthetic.main.activity_main.*
+import android.arch.paging.PageKeyedDataSource
+import com.raywenderlich.android.redditclone.networking.RedditPost
 
-class MainActivity : AppCompatActivity() {
+class RedditDataSource : PageKeyedDataSource<String, RedditPost>() {
 
-  private val adapter = RedditAdapter()
-
-  override fun onCreate(savedInstanceState: Bundle?) {
-    super.onCreate(savedInstanceState)
-    setContentView(R.layout.activity_main)
-    initializeList()
+  override fun loadInitial(
+      params: LoadInitialParams<String>,
+      callback: LoadInitialCallback<String, RedditPost>
+  ) {
+    TODO("not implemented")
   }
 
-  private fun initializeList() {
-    list.layoutManager = LinearLayoutManager(this)
-    list.adapter = adapter
+  override fun loadAfter(params: LoadParams<String>, callback: LoadCallback<String, RedditPost>) {
+    TODO("not implemented")
+  }
+
+  override fun loadBefore(params: LoadParams<String>, callback: LoadCallback<String, RedditPost>) {
+    TODO("not implemented")
   }
 }
