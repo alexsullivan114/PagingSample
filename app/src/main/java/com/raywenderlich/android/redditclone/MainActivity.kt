@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017 Razeware LLC
+ * Copyright (c) 2018 Razeware LLC
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -36,16 +36,14 @@ import android.arch.paging.PagedList
 import android.os.Bundle
 import android.raywenderlich.com.R
 import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
 import com.raywenderlich.android.redditclone.database.RedditDb
 import com.raywenderlich.android.redditclone.networking.RedditPost
-import com.raywenderlich.android.redditclone.networking.RedditService
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
-  val adapter = RedditAdapter()
+  private val adapter = RedditAdapter()
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
@@ -56,18 +54,18 @@ class MainActivity : AppCompatActivity() {
   private fun initializeList() {
     list.layoutManager = LinearLayoutManager(this)
     list.adapter = adapter
-    list.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
-
-    val database = RedditDb.create(this)
 
     val config = PagedList.Config.Builder()
         .setPageSize(30)
         .setEnablePlaceholders(false)
         .build()
 
-    val livePagedListBuilder = LivePagedListBuilder<Int, RedditPost>(database.posts().posts(), config)
-    livePagedListBuilder.setBoundaryCallback(RedditBoundaryCallback(database, RedditService.createService()))
-    val liveData = livePagedListBuilder.build()
+    val database = RedditDb.create(this)
+
+    val livePageListBuilder = LivePagedListBuilder<Int, RedditPost>(database.postDao().posts(), config)
+    livePageListBuilder.setBoundaryCallback(RedditBoundaryCallback(database))
+    val liveData = livePageListBuilder.build()
+
     liveData
         .observe(this, Observer<PagedList<RedditPost>> { pagedList ->
           adapter.submitList(pagedList)

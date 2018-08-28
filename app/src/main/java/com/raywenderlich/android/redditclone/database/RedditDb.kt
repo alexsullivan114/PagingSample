@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017 Razeware LLC
+ * Copyright (c) 2018 Razeware LLC
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -37,7 +37,7 @@ import android.content.Context
 import com.raywenderlich.android.redditclone.networking.RedditPost
 
 @Database(
-    entities = [(RedditPost::class)],
+    entities = [RedditPost::class],
     version = 1,
     exportSchema = false
 )
@@ -49,5 +49,5 @@ abstract class RedditDb : RoomDatabase() {
     }
   }
 
-  abstract fun posts(): RedditPostDao
+  abstract fun postDao(): RedditPostDao
 }
